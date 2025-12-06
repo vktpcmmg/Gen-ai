@@ -19,7 +19,7 @@ from openai import OpenAI
 # 1) Put your RAW GitHub URL of the New Commissioning Excel here
 # Example:
 # GITHUB_EXCEL_URL = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/path/to/new_commissioning.xlsx"
-GITHUB_EXCEL_URL = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/path/to/new_commissioning.xlsx"
+GITHUB_EXCEL_URL = "https://raw.githubusercontent.com/vktpcmmg/Gen-ai/main/new_commissioning.xlsx"
 
 # 2) OpenAI model name
 OPENAI_MODEL = "gpt-4.1-mini"
