@@ -20,29 +20,47 @@ def load_excel():
 # STREAMLIT UI
 # ====================
 
-st.title("New Commissioning Search Tool (No OpenAI Needed)")
+st.title("🔍 New Commissioning Search Tool (Card View)")
 
 df = load_excel()
-
 st.success("Excel loaded successfully from GitHub")
 
-# Let user choose any column
 selected_column = st.selectbox("Select Column to Search", df.columns)
-
-# Let user enter value
 search_value = st.text_input("Enter value to search")
 
 if st.button("Search"):
     if search_value.strip() == "":
         st.warning("Please enter a value.")
     else:
-        # Convert everything to string for easy matching
         mask = df[selected_column].astype(str).str.contains(search_value, case=False, na=False)
-
         results = df[mask]
 
         if results.empty:
             st.error("No matching records found.")
         else:
             st.success(f"{len(results)} record(s) found.")
-            st.dataframe(results)
+
+            # ----------- CARD VIEW -----------
+            for idx, row in results.iterrows():
+                
+                st.markdown(
+                    """
+                    <div style="
+                        background-color: #f2f2f2; 
+                        padding: 15px; 
+                        border-radius: 10px; 
+                        margin-bottom: 20px;
+                        border-left: 8px solid #4CAF50;
+                    ">
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(f"### 🧾 Result {idx+1}")
+
+                # Display each column vertically inside card
+                for col in df.columns:
+                    value = row[col]
+                    st.markdown(f"**{col}:** {value}")
+
+                st.markdown("</div>", unsafe_allow_html=True)
